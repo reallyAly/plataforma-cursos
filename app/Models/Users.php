@@ -12,12 +12,10 @@ class Users extends Model
      *
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'usuarios';
 
-    protected $primaryKey = 'usuario_id';
+    protected $primaryKey = 'id_usuario';
 
     public $incrementing = false;
-
-
 
 }

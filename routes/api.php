@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,12 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("users", "UserController@getAllUsers");
-Route::get("users/{id}", 'UserController@');
+Route::get("users", "App\Http\Controllers\Api\UsersController@getAllUsers");
+Route::get("users/{email}", 'App\Http\Controllers\Api\UsersController@getUser');
 
-Route::post("users", "UserController@save");
-Route::post("users/auth", "UserController@auth");
-Route::post("users/validate", "UserController@validate");
+Route::post("users", "App\Http\Controllers\Api\UsersController@save");
+Route::post("users/auth", "App\Http\Controllers\Api\UsersController@auth");
+Route::post("users/validate", "App\Http\Controllers\Api\UsersController@validate");
 
-Route::put("users/{id}", "UserController@update");
-Route::delete("users/{id}","UserController@delete");
+Route::post("users/update", "App\Http\Controllers\Api\UsersController@update");
+Route::post("users/delete","App\Http\Controllers\Api\UsersController@delete");

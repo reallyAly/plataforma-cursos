@@ -17,4 +17,6 @@ class Cursos extends Model
     protected $primaryKey = 'id_curso';
 
     public $incrementing = false;
+
+    public $timestamps = false;
 }

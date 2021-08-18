@@ -1,52 +1,46 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-
+use App\Models\Cursos;
 use Illuminate\Http\Request;
-use App\Models\Users;
-use Illuminate\Routing\Controller;
 
-/**
- * Class UsersController
- * @package App\Http\Controllers\Api
- */
-class UsersController extends Controller
+class CursoController extends Controller
 {
     /**
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getAllUsers()
+    public function getAllCursos()
     {
-        $usersCollection = Users::all();
-        return response()->json($usersCollection->toArray());
+        $cursosCollection = Cursos::all();
+        return response()->json($cursosCollection->toArray());
     }
 
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function save(Request $request)
+    public function salvar(Request $request)
     {
-        $newUser = new Users();
+        $novoCurso = new Cursos();
 
-        $newUser->nome_usuario = $request->nome_usuario;
-        $newUser->cpf_usuario = $request->cpf_usuario;
-        $newUser->email_usuario = $request->email_usuario;
-        $newUser->senha_usuario = $request->senha_usuario;
+        $novoCurso->nome_curso = $request->nome_curso;
+        $novoCurso->preco_curso = $request->preco_curso;
+        $novoCurso->periodo_curso = $request->periodo_curso;
+        $novoCurso->descricao_curso = $request->descricao_curso;
 
         try{
-            $newUser->save();
+            $novoCurso->save();
         }catch(\Exception $e){
             return response()->json([
-                "message" => "Erro ao salvar usuário: {$e->getMessage()}",
+                "message" => "Erro ao salvar curso: {$e->getMessage()}",
                 "code" => intval($e->getCode()),
                 "success" => false
             ], 500);
         }
 
         return response()->json([
-            "message" => "O usuário foi salvo com sucesso",
+            "message" => "O curso foi salvo com sucesso",
             "code" => 201,
             "success" => true
         ], 201);
@@ -57,10 +51,10 @@ class UsersController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function delete(Request $request)
+    public function deletar(Request $request)
     {
         try{
-            Users::where(['email_usuario' => $request->email_usuario])->first()->delete();
+            Cursos::where(['id_curso' => $request->id_curso])->first()->delete();
         }catch(\Exception $e){
             return response()->json([
                 "message" => $e->getMessage(),
@@ -70,7 +64,7 @@ class UsersController extends Controller
         }
 
         return response()->json([
-            "message" => 'Usuário deletado com sucesso',
+            "message" => 'Curso deletado com sucesso',
             "code" => 201,
             "success" => true
         ]);
@@ -79,26 +73,26 @@ class UsersController extends Controller
     /**
      * @param Request $request
      */
-    public function update(Request $request)
+    public function atualizar(Request $request)
     {
         try{
 
-            $user = Users::where("email_usuario", $request->email_usuario)->first();
+            $curso = Cursos::where("id_curso", $request->id_curso)->first();
 
-            if(empty($user)){
+            if(empty($usuario)){
                 return response()->json([
-                    "message" => 'Usuário não encontrado',
+                    "message" => 'Curso não encontrado',
                     'code' => 404,
                     'success' => false
                 ]);
             }
 
-            $user->nome_usuario = $request->nome_usuario;
-            $user->email_usuario = $request->email_usuario;
-            $user->cpf_usuario = $request->cpf_usuario;
-            $user->senha_usuario = $request->senha_usuario;
+            $curso->nome_curso = $request->nome_curso;
+            $curso->preco_curso = $request->preco_curso;
+            $curso->periodo_curso = $request->periodo_curso;
+            $curso->descricao_curso = $request->descricao_curso;
 
-            $user->save();
+            $curso->save();
         }catch(\Exception $e){
             return response()->json([
                 "message" => $e->getMessage(),
@@ -115,29 +109,13 @@ class UsersController extends Controller
     }
 
     /**
-     * @param Request $request
-     */
-    public function auth(Request $request)
-    {
-        return;
-    }
-
-    /**
-     * @param Request $request
-     */
-    public function validateSession(Request $request)
-    {
-        return;
-    }
-
-    /**
      * @param $email
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getUser($email)
+    public function getCurso($id)
     {
         try{
-            return response()->json(Users::where(['email_usuario' => $email])->get());
+            return response()->json(Cursos::where(['id_curso' => $id])->first());
         }catch(\Exception $e){
             return response()->json([
                 "message" => $e->getMessage(),
@@ -148,5 +126,4 @@ class UsersController extends Controller
 
         return response()->json(array());
     }
-
 }

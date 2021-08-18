@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Users extends Model
+class Cursos extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'usuarios';
+    protected $table = 'Cursos';
 
-    protected $primaryKey = 'id_usuario';
+    protected $primaryKey = 'id_curso';
 
     public $incrementing = false;
-
 }

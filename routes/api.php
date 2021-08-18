@@ -19,12 +19,24 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("users", "App\Http\Controllers\Api\UsersController@getAllUsers");
-Route::get("users/{email}", 'App\Http\Controllers\Api\UsersController@getUser');
+/** Usuários */
 
-Route::post("users", "App\Http\Controllers\Api\UsersController@save");
-Route::post("users/auth", "App\Http\Controllers\Api\UsersController@auth");
-Route::post("users/validate", "App\Http\Controllers\Api\UsersController@validate");
+Route::get("usuarios", "App\Http\Controllers\Api\UsuariosController@getAllUsuarios");
+Route::get("usuarios/{email}", 'App\Http\Controllers\Api\UsuariosController@getUsuario');
 
-Route::post("users/update", "App\Http\Controllers\Api\UsersController@update");
-Route::post("users/delete","App\Http\Controllers\Api\UsersController@delete");
+Route::post("usuarios", "App\Http\Controllers\Api\UsuariosController@salvar");
+Route::post("usuarios/auth", "App\Http\Controllers\Api\UsuariosController@autenticar");
+Route::post("usuarios/validate", "App\Http\Controllers\Api\UsuariosController@validar");
+Route::post("usuarios/update", "App\Http\Controllers\Api\UsuariosController@atualizar");
+Route::post("usuarios/delete","App\Http\Controllers\Api\UsuariosController@deletar");
+
+/** Cursos */
+
+Route::get("cursos", "App\Http\Controllers\Api\CursosController@getAllCursos");
+Route::get("cursos/{email}", 'App\Http\Controllers\Api\CursosController@getCurso');
+
+Route::post("cursos", "App\Http\Controllers\Api\CursosController@salvar");
+Route::post("cursos/update", "App\Http\Controllers\Api\CursosController@atualizar");
+Route::post("cursos/delete","App\Http\Controllers\Api\CursosController@deletar");
+
+

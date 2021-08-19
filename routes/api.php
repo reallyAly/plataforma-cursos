@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +30,7 @@ Route::post("usuarios/delete","App\Http\Controllers\Api\UsuariosController@delet
 
 /** Cursos */
 Route::get("cursos", "App\Http\Controllers\Api\CursosController@getAllCursos");
-Route::get("cursos/{id}", 'App\Http\Controllers\Api\CursosController@getCurso');
+Route::get("cursos/{id_curso}", 'App\Http\Controllers\Api\CursosController@getCurso');
 
 Route::post("cursos", "App\Http\Controllers\Api\CursosController@salvar");
 Route::post("cursos/update", "App\Http\Controllers\Api\CursosController@atualizar");
@@ -39,16 +38,23 @@ Route::post("cursos/delete","App\Http\Controllers\Api\CursosController@deletar")
 
 /** Certificados */
 Route::get("certificados", "App\Http\Controllers\Api\CertificadosController@getAllCertificados");
-Route::get("certificados/{id}", 'App\Http\Controllers\Api\CertificadosController@getCertificado');
+Route::get("certificados/{id_certificado}", 'App\Http\Controllers\Api\CertificadosController@getCertificado');
 Route::get("certificados/{hash_certificado}", 'App\Http\Controllers\Api\CertificadosController@validaCertificado');
 Route::post("certificados", "App\Http\Controllers\Api\CertificadosController@salvar");
 
 /** Compras */
 Route::get("compras", "App\Http\Controllers\Api\ComprasController@getAllCompras");
-Route::get("compras/{id}", 'App\Http\Controllers\Api\ComprasController@getCompra');
+Route::get("compras/{id_compra}", 'App\Http\Controllers\Api\ComprasController@getCompra');
 Route::post("compras", "App\Http\Controllers\Api\ComprasController@salvar");
 
 /** CursoUsuario */
 Route::get("cursoUsuario/{id_usuario}", 'App\Http\Controllers\Api\CursoUsuarioController@getAllCursosDoUsuario');
 Route::post("cursoUsuario/atualizarProgresso", "App\Http\Controllers\Api\CursoUsuarioController@atualizarProgresso");
+
+/** InfoVideo */
+Route::get("infovideo/{id_curso}", "App\Http\Controllers\Api\InfoVideoController@getAllVideosDoCurso");
+Route::get("infovideo/{id_video}", "App\Http\Controllers\Api\InfoVideoController@getVideo");
+Route::post("infovideo", "App\Http\Controllers\Api\InfoVideoController@salvar");
+Route::post("infovideo/delete", "App\Http\Controllers\Api\InfoVideoController@deletar");
+Route::post("infovideo/update", "App\Http\Controllers\Api\InfoVideoController@atualizar");
 

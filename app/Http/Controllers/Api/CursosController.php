@@ -30,6 +30,7 @@ class CursosController extends Controller
         $novoCurso->preco_curso = $request->preco_curso;
         $novoCurso->periodo_curso = $request->periodo_curso;
         $novoCurso->descricao_curso = $request->descricao_curso;
+        $novoCurso->visivel_curso = $request->visivel_curso;
 
         try{
             $novoCurso->save();

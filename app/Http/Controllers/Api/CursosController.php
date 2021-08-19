@@ -82,7 +82,7 @@ class CursosController extends Controller
 
             $curso = Cursos::where("id_curso", $request->id_curso)->first();
 
-            if(empty($usuario)){
+            if(empty($curso)){
                 return response()->json([
                     "message" => 'Curso não encontrado',
                     'code' => 404,

@@ -80,7 +80,7 @@ class InfoVideoController extends Controller
 
             $video = InfoVideo::where("id_video", $request->id_video)->first();
 
-            if(empty($usuario)){
+            if(empty($video)){
                 return response()->json([
                     "message" => 'Curso não encontrado',
                     'code' => 404,

@@ -20,7 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 /** Usuários */
-
 Route::get("usuarios", "App\Http\Controllers\Api\UsuariosController@getAllUsuarios");
 Route::get("usuarios/{email}", 'App\Http\Controllers\Api\UsuariosController@getUsuario');
 
@@ -31,12 +30,21 @@ Route::post("usuarios/update", "App\Http\Controllers\Api\UsuariosController@atua
 Route::post("usuarios/delete","App\Http\Controllers\Api\UsuariosController@deletar");
 
 /** Cursos */
-
 Route::get("cursos", "App\Http\Controllers\Api\CursosController@getAllCursos");
-Route::get("cursos/{email}", 'App\Http\Controllers\Api\CursosController@getCurso');
+Route::get("cursos/{id}", 'App\Http\Controllers\Api\CursosController@getCurso');
 
 Route::post("cursos", "App\Http\Controllers\Api\CursosController@salvar");
 Route::post("cursos/update", "App\Http\Controllers\Api\CursosController@atualizar");
 Route::post("cursos/delete","App\Http\Controllers\Api\CursosController@deletar");
+
+/** Certificados */
+Route::get("certificados", "App\Http\Controllers\Api\CursosController@getAllCertificados");
+Route::get("certificados/{id}", 'App\Http\Controllers\Api\CursosController@getCertificado');
+Route::post("certificados", "App\Http\Controllers\Api\CursosController@salvar");
+
+/** Compras */
+Route::get("compras", "App\Http\Controllers\Api\ComprasController@getAllCompras");
+Route::get("compras/{id}", 'App\Http\Controllers\Api\ComprasController@getCompra');
+Route::post("compras", "App\Http\Controllers\Api\ComprasController@salvar");
 
 

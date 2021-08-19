@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Cursos;
 use Illuminate\Http\Request;
 
-class CursoController extends Controller
+class CursosController extends Controller
 {
     /**
      * @return \Illuminate\Http\JsonResponse

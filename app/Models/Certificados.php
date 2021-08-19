@@ -2,19 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cursos extends Model
+class Certificados extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'Curso';
+    protected $table = 'Certificado';
 
-    protected $primaryKey = 'id_curso';
+    protected $primaryKey = 'id_certificado';
 
     public $incrementing = false;
 

@@ -113,10 +113,10 @@ class InfoVideoController extends Controller
      * @param $email
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getVideo($id)
+    public function getVideo($id_video)
     {
         try{
-            return response()->json(Cursos::where(['id_video' => $id])->first());
+            return response()->json(Cursos::where(['id_video' => $id_video])->first());
         }catch(\Exception $e){
             return response()->json([
                 "message" => $e->getMessage(),

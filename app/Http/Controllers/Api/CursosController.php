@@ -116,10 +116,10 @@ class CursosController extends Controller
      * @param $email
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getCurso($id)
+    public function getCurso($id_curso)
     {
         try{
-            return response()->json(Cursos::where(['id_curso' => $id])->first());
+            return response()->json(Cursos::where(['id_curso' => $id_curso])->first());
         }catch(\Exception $e){
             return response()->json([
                 "message" => $e->getMessage(),

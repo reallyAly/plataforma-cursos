@@ -59,10 +59,10 @@ class ComprasController extends Controller
      * @param $email
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getCompra($id)
+    public function getCompra($id_compra)
     {
         try{
-            return response()->json(Compras::where(['id_compras' => $id])->first());
+            return response()->json(Compras::where(['id_compras' => $id_compra])->first());
         }catch(\Exception $e){
             return response()->json([
                 "message" => $e->getMessage(),

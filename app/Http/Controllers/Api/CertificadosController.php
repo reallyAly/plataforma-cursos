@@ -51,10 +51,10 @@ class CertificadosController extends Controller
      * @param $email
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getCertificado($id)
+    public function getCertificado($id_certificado)
     {
         try{
-            return response()->json(Certificados::where(['id_certificado' => $id])->first());
+            return response()->json(Certificados::where(['id_certificado' => $id_certificado])->first());
         }catch(\Exception $e){
             return response()->json([
                 "message" => $e->getMessage(),

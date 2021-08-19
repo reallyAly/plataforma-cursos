@@ -94,6 +94,7 @@ class CursosController extends Controller
             $curso->preco_curso = $request->preco_curso;
             $curso->periodo_curso = $request->periodo_curso;
             $curso->descricao_curso = $request->descricao_curso;
+            $curso->visivel_curso = $request->visivel_curso;
 
             $curso->save();
         }catch(\Exception $e){

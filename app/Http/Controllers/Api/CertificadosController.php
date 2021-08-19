@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Certificados;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class CertificadosController extends Controller
 {

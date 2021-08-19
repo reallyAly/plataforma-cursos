@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Compras;
 use App\Models\Cursos;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class ComprasController extends Controller
 {

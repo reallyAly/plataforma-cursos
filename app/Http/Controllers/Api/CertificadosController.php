@@ -64,4 +64,24 @@ class CertificadosController extends Controller
 
         return response()->json(array());
     }
+
+    public function validaCertificado($hash_certificado)
+    {
+        try{
+            $response = Certificados::where(['hash_certificado' => $hash_certificado])->first();
+
+            if(!empty($response)){
+                return response()->json(['certificado_valido' => true]);
+            }
+
+        }catch(\Exception $e){
+            return response()->json([
+                "message" => $e->getMessage(),
+                'code' => $e->getCode(),
+                'success' => false
+            ]);
+        }
+
+        return response()->json(['certificado_valido' => false]);
+    }
 }

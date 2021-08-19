@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Compras extends Model
+class CursosUsuario extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'Compra';
+    protected $table = 'CursoUsuario';
 
-    protected $primaryKey = 'id_compra';
+    protected $primaryKey = 'id_cursoUsuario';
 
     public $incrementing = false;
 

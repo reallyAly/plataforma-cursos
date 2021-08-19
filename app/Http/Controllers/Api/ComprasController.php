@@ -35,6 +35,9 @@ class ComprasController extends Controller
 
         try{
             $novaCompra->save();
+            $controller = new CursosUsuarioController();
+            $controller->salvar($request->id_curso, $request->id_usuario);
+
         }catch(\Exception $e){
             return response()->json([
                 "message" => "Erro ao salvar compra: {$e->getMessage()}",

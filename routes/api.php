@@ -38,13 +38,17 @@ Route::post("cursos/update", "App\Http\Controllers\Api\CursosController@atualiza
 Route::post("cursos/delete","App\Http\Controllers\Api\CursosController@deletar");
 
 /** Certificados */
-Route::get("certificados", "App\Http\Controllers\Api\CursosController@getAllCertificados");
-Route::get("certificados/{id}", 'App\Http\Controllers\Api\CursosController@getCertificado');
-Route::post("certificados", "App\Http\Controllers\Api\CursosController@salvar");
+Route::get("certificados", "App\Http\Controllers\Api\CertificadosController@getAllCertificados");
+Route::get("certificados/{id}", 'App\Http\Controllers\Api\CertificadosController@getCertificado');
+Route::get("certificados/{hash_certificado}", 'App\Http\Controllers\Api\CertificadosController@validaCertificado');
+Route::post("certificados", "App\Http\Controllers\Api\CertificadosController@salvar");
 
 /** Compras */
 Route::get("compras", "App\Http\Controllers\Api\ComprasController@getAllCompras");
 Route::get("compras/{id}", 'App\Http\Controllers\Api\ComprasController@getCompra');
 Route::post("compras", "App\Http\Controllers\Api\ComprasController@salvar");
 
+/** CursoUsuario */
+Route::get("cursoUsuario/{id_usuario}", 'App\Http\Controllers\Api\CursoUsuarioController@getAllCursosDoUsuario');
+Route::post("cursoUsuario/atualizarProgresso", "App\Http\Controllers\Api\CursoUsuarioController@atualizarProgresso");
 

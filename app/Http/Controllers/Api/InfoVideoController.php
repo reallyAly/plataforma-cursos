@@ -26,7 +26,7 @@ class InfoVideoController extends Controller
         $novoVideo = new InfoVideo();
 
         $novoVideo->nome_video = $request->nome_video;
-        $novoVideo->url_video = $request->preco_curso;
+        $novoVideo->url_video = $request->url_video;
         $novoVideo->id_curso = $request->id_curso;
         $novoVideo->video_visto = 1;
 
@@ -89,7 +89,7 @@ class InfoVideoController extends Controller
             }
 
             $video->nome_video = $request->nome_curso;
-            $video->nome_video = $request->preco_curso;
+            $video->url_video = $request->url_video;
             $video->id_curso = $video->id_curso;
             $video->video_visto = 1;
 

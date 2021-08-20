@@ -27,12 +27,15 @@ class ComprasController extends Controller
         $novaCompra = new Compras();
         $curso = Cursos::find($request->id_curso);
 
+        $size = 2;
+        $seed = time();
+
         $novaCompra->id_usuario = $request->id_usuario;
         $novaCompra->id_curso = $request->id_curso;
         $novaCompra->tipo_compra = $request->tipo_compra;
         $novaCompra->valor_compra = $curso->preco_curso;
         $novaCompra->data_compra = date('Y-m-d');
-        $novaCompra->hashboleto_compra = '0000001';
+        $novaCompra->hashboleto_compra = substr(sha1($seed), 40 - min($size,40));
 
         try{
             $novaCompra->save();

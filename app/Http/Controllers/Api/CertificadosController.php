@@ -25,7 +25,10 @@ class CertificadosController extends Controller
     {
         $novoCertificado= new Certificados();
 
-        $novoCertificado->hash_certificado = '00000000001';
+        $size = 2;
+        $seed = time();
+
+        $novoCertificado->hash_certificado = substr(sha1($seed), 40 - min($size,40));
         $novoCertificado->id_usuario = $request->id_usuario;
         $novoCertificado->id_curso = $request->id_curso;
 
@@ -51,7 +54,7 @@ class CertificadosController extends Controller
      * @param $email
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getCertificado($id_certificado)
+    public function getCertificado($hash_certificado)
     {
         try{
             return response()->json(Certificados::where(['id_certificado' => $id_certificado])->first());

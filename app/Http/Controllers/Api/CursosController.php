@@ -113,7 +113,7 @@ class CursosController extends Controller
     }
 
     /**
-     * @param $email
+     * @param $id_curso
      * @return \Illuminate\Http\JsonResponse
      */
     public function getCurso($id_curso)
@@ -128,6 +128,6 @@ class CursosController extends Controller
             ]);
         }
 
-        return response()->json(array());
+        return response()->json(['success' => false]);
     }
 }

@@ -119,7 +119,11 @@ class CursosController extends Controller
     public function getCurso($id_curso)
     {
         try{
-            return response()->json(Cursos::where(['id_curso' => $id_curso])->first());
+            $response = response()->json(Cursos::where(['id_curso' => $id_curso])->first());
+
+            if(!empty($response)){
+                return $response;
+            }
         }catch(\Exception $e){
             return response()->json([
                 "message" => $e->getMessage(),
@@ -128,6 +132,10 @@ class CursosController extends Controller
             ]);
         }
 
-        return response()->json(['success' => false]);
+        return response()->json([
+            "message" => 'Curso não encontrado',
+            'code' => 0,
+            'success' => false
+        ]);
     }
 }

@@ -137,7 +137,12 @@ class UsuariosController extends Controller
     public function getUsuario($email)
     {
         try{
-            return response()->json(Usuarios::where(['email_usuario' => $email])->get());
+            $response = response()->json(Usuarios::where(['email_usuario' => $email])->get());
+
+            if(!empty($response)){
+                return $response;
+            }
+
         }catch(\Exception $e){
             return response()->json([
                 "message" => $e->getMessage(),
@@ -146,7 +151,11 @@ class UsuariosController extends Controller
             ]);
         }
 
-        return response()->json(array());
+        return response()->json([
+            "message" => 'Usuário não encontrado',
+            'code' => 0,
+            'success' => false
+        ]);
     }
 
 }

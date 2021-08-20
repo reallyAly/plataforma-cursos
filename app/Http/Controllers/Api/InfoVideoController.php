@@ -116,7 +116,11 @@ class InfoVideoController extends Controller
     public function getVideo($id_video)
     {
         try{
-            return response()->json(Cursos::where(['id_video' => $id_video])->first());
+            $response = response()->json(Cursos::where(['id_video' => $id_video])->first());
+
+            if(!empty($response)){
+                return $response;
+            }
         }catch(\Exception $e){
             return response()->json([
                 "message" => $e->getMessage(),
@@ -125,6 +129,10 @@ class InfoVideoController extends Controller
             ]);
         }
 
-        return response()->json(array());
+        return response()->json([
+            "message" => 'Vídeo não encontrado',
+            'code' => 0,
+            'success' => false
+        ]);
     }
 }

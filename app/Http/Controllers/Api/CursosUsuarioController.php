@@ -16,42 +16,16 @@ class CursosUsuarioController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getAllCursosDoUsuario(Request $request)
+    public function getAllCursosDoUsuario($id_usuario)
     {
-        return response()->json(CursosUsuario::where(['id_usuario', $request->id_usuario])->get());
-    }
+        $cursos = CursosUsuario::where(['id_usuario' => $id_usuario])->get();
+        $ids = [];
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function atualizarProgresso(Request $request)
-    {
-        $cursoUsuario = CursosUsuario::where([
-            'id_curso' => $request->id_curso,
-            'id_usuario' => $request->id_usuario
-        ])->first();
-
-        $cursoUsuario->id_video = $request->id_video;
-        $cursoUsuario->id_curso = $cursoUsuario->id_curso;
-        $cursoUsuario->id_usuario = $cursoUsuario->id_usuario;
-
-        try{
-            $cursoUsuario->save();
-        }catch(\Exception $e){
-            return response()->json([
-                "message" => "Erro ao atualizar progresso: {$e->getMessage()}",
-                "code" => intval($e->getCode()),
-                "success" => false
-            ], 500);
+        foreach($cursos as $curso){
+            array_push($ids, $curso['id_curso']);
         }
 
-        return response()->json([
-            "message" => "O progresso foi atualizado com sucesso",
-            "code" => 201,
-            "success" => true
-        ], 201);
-
+        return response()->json($ids);
     }
 
     /**
@@ -65,7 +39,6 @@ class CursosUsuarioController extends Controller
 
         $novoCursoUsuario->id_curso = $idCurso;
         $novoCursoUsuario->id_usuario = $IdUsuario;
-        $novoCursoUsuario->id_video = 0;
 
         try{
             $novoCursoUsuario->save();

@@ -27,7 +27,7 @@ class ComprasController extends Controller
         $novaCompra = new Compras();
         $curso = Cursos::find($request->id_curso);
 
-        $size = 2;
+        $size = 13;
         $seed = time();
 
         $novaCompra->id_usuario = $request->id_usuario;
@@ -37,11 +37,18 @@ class ComprasController extends Controller
         $novaCompra->data_compra = date('Y-m-d');
         $novaCompra->hashboleto_compra = substr(sha1($seed), 40 - min($size,40));
 
+        $novaCompra->rua_endereco = $request->rua_endereco;
+        $novaCompra->numero_endereco = $request->numero_endereco;
+        $novaCompra->complemento_endereco = $request->complemento_endereco;
+        $novaCompra->bairro_endereco = $request->bairro_endereco;
+        $novaCompra->estado_endereco = $request->estado_endereco;
+        $novaCompra->cidade_endereco = $request->cidade_endereco;
+        $novaCompra->cep_endereco = $request->cep_endereco;
+
         try{
             $novaCompra->save();
             $controller = new CursosUsuarioController();
-            $controller->salvar($request->id_curso, $request->id_usuario);
-
+            $var = $controller->salvar($request->id_curso, $request->id_usuario);
         }catch(\Exception $e){
             return response()->json([
                 "message" => "Erro ao salvar compra: {$e->getMessage()}",

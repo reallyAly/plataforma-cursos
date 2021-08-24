@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Cursos;
 use Illuminate\Http\Request;
 use App\Models\InfoVideo;
+use Illuminate\Routing\Controller;
 
 class InfoVideoController extends Controller
 {
@@ -28,7 +29,7 @@ class InfoVideoController extends Controller
         $novoVideo->nome_video = $request->nome_video;
         $novoVideo->url_video = $request->url_video;
         $novoVideo->id_curso = $request->id_curso;
-        $novoVideo->video_visto = 1;
+        $novoVideo->id_etapa = $request->id_etapa;
 
         try{
             $novoVideo->save();
@@ -82,7 +83,7 @@ class InfoVideoController extends Controller
 
             if(empty($video)){
                 return response()->json([
-                    "message" => 'Curso não encontrado',
+                    "message" => 'Video não encontrado',
                     'code' => 404,
                     'success' => false
                 ]);
@@ -91,7 +92,7 @@ class InfoVideoController extends Controller
             $video->nome_video = $request->nome_curso;
             $video->url_video = $request->url_video;
             $video->id_curso = $video->id_curso;
-            $video->video_visto = 1;
+            $video->id_etapa = $request->id_etapa;
 
             $video->save();
         }catch(\Exception $e){
@@ -116,7 +117,7 @@ class InfoVideoController extends Controller
     public function getVideo($id_video)
     {
         try{
-            $response = response()->json(Cursos::where(['id_video' => $id_video])->first());
+            $response = response()->json(InfoVideo::where(['id_video' => $id_video])->first());
 
             if(!empty($response)){
                 return $response;

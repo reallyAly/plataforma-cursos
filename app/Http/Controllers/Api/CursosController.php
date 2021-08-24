@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Etapas;
 use App\Models\Cursos;
-use App\Http\Controllers\Api\CursosUsuarioController;
+use App\Models\InfoVideo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -25,15 +26,32 @@ class CursosController extends Controller
     public function salvar(Request $request)
     {
         $novoCurso = new Cursos();
-
-        $novoCurso->nome_curso = $request->nome_curso;
-        $novoCurso->preco_curso = $request->preco_curso;
-        $novoCurso->periodo_curso = $request->periodo_curso;
-        $novoCurso->descricao_curso = $request->descricao_curso;
-        $novoCurso->visivel_curso = $request->visivel_curso;
+        $novaEtapa = new Etapas();
+        $novoVideo = new InfoVideo();
 
         try{
+            $novoCurso->nome_curso = $request->nome_curso;
+            $novoCurso->preco_curso = $request->preco_curso;
+            $novoCurso->periodo_curso = $request->periodo_curso;
+            $novoCurso->descricao_curso = $request->descricao_curso;
+            $novoCurso->visivel_curso = $request->visivel_curso;
             $novoCurso->save();
+
+            $novoCurso = $novoCurso->get()->last();
+
+            $novaEtapa->nome_etapa = "Introdução";
+            $novaEtapa->id_curso = $novoCurso->id_curso;
+            $novaEtapa->save();
+
+            $novaEtapa = $novaEtapa->get()->last();
+
+
+            $novoVideo->nome_video = "Aula 1";
+            $novoVideo->id_curso = $novoCurso->id_curso;
+            $novoVideo->id_etapa = $novaEtapa->id_etapa;
+
+            $novoVideo->save();
+
         }catch(\Exception $e){
             return response()->json([
                 "message" => "Erro ao salvar curso: {$e->getMessage()}",

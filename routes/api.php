@@ -24,9 +24,10 @@ Route::get("usuarios/{email}", 'App\Http\Controllers\Api\UsuariosController@getU
 
 Route::post("usuarios", "App\Http\Controllers\Api\UsuariosController@salvar");
 Route::post("usuarios/auth", "App\Http\Controllers\Api\UsuariosController@autenticar");
-Route::post("usuarios/validate", "App\Http\Controllers\Api\UsuariosController@validar");
+Route::post("usuarios/validate", "App\Http\Controllers\Api\UsuariosController@validarUsuario");
 Route::post("usuarios/update", "App\Http\Controllers\Api\UsuariosController@atualizar");
 Route::post("usuarios/delete","App\Http\Controllers\Api\UsuariosController@deletar");
+
 
 /** Cursos */
 Route::get("cursos", "App\Http\Controllers\Api\CursosController@getAllCursos");
@@ -48,8 +49,7 @@ Route::get("compras/{id_compra}", 'App\Http\Controllers\Api\ComprasController@ge
 Route::post("compras", "App\Http\Controllers\Api\ComprasController@salvar");
 
 /** CursoUsuario */
-Route::get("cursoUsuario/{id_usuario}", 'App\Http\Controllers\Api\CursoUsuarioController@getAllCursosDoUsuario');
-Route::post("cursoUsuario/atualizarProgresso", "App\Http\Controllers\Api\CursoUsuarioController@atualizarProgresso");
+Route::get("cursoUsuario/{id_usuario}", 'App\Http\Controllers\Api\CursosUsuarioController@getAllCursosDoUsuario');
 
 /** InfoVideo */
 Route::get("infovideo/{id_curso}", "App\Http\Controllers\Api\InfoVideoController@getAllVideosDoCurso");
@@ -58,3 +58,13 @@ Route::post("infovideo", "App\Http\Controllers\Api\InfoVideoController@salvar");
 Route::post("infovideo/delete", "App\Http\Controllers\Api\InfoVideoController@deletar");
 Route::post("infovideo/update", "App\Http\Controllers\Api\InfoVideoController@atualizar");
 
+/** Etapas */
+Route::get("etapas/{id_curso}", "App\Http\Controllers\Api\EtapasController@getAllEtapasDoCurso");
+Route::get("etapas/nomes/{id_curso}", "App\Http\Controllers\Api\EtapasController@getAllNomesEtapasDoCurso");
+
+Route::post("etapas/update", "App\Http\Controllers\Api\EtapasController@atualizar");
+Route::post("etapas", "App\Http\Controllers\Api\EtapasController@salvar");
+Route::post("etapas/delete", "App\Http\Controllers\Api\EtapasController@deletar");
+
+/** VideoUsuario **/
+Route::post("videousuario/adicionarvideo", "App\Http\Controllers\Api\VideoUsuarioController@adicionarVideo");

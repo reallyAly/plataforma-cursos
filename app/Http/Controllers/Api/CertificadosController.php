@@ -25,7 +25,7 @@ class CertificadosController extends Controller
     {
         $novoCertificado= new Certificados();
 
-        $size = 2;
+        $size = 10;
         $seed = time();
 
         $novoCertificado->hash_certificado = substr(sha1($seed), 40 - min($size,40));

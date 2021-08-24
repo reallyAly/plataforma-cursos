@@ -95,7 +95,6 @@ class UsuariosController extends Controller
 
             $usuario->nome_usuario = $request->nome_usuario;
             $usuario->email_usuario = $request->email_usuario;
-            $usuario->cpf_usuario = $request->cpf_usuario;
             $usuario->senha_usuario = $request->senha_usuario;
 
             $usuario->save();
@@ -119,15 +118,49 @@ class UsuariosController extends Controller
      */
     public function autenticar(Request $request)
     {
-        return;
+        $usuario = Usuarios::where([
+            'email_usuario' => $request->email_usuario,
+            'senha_usuario' => $request->senha_usuario
+        ])->first();
+
+        $size = 50;
+        $seed = time();
+
+        if(!empty($usuario)){
+            $usuario = $usuario->toArray();
+
+            return response()->json([
+                'email_usuario' => $usuario['email_usuario'],
+                'nome_usuario' => $usuario['nome_usuario'],
+                'tipo_usuario' => $usuario['tipo_usuario'],
+                'token_usuario' => substr(sha1($seed), 40 - min($size,40))
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Credenciais inválidas',
+            'code' => 0,
+            'success' => false
+        ]);
     }
 
-    /**
-     * @param Request $request
-     */
-    public function validateSession(Request $request)
+
+    public function validarUsuario(Request $request)
     {
-        return;
+        $usuario = Usuarios::where([
+            'email_usuario' => $request->email_usuario,
+            'senha_usuario' => $request->senha_usuario
+        ])->first();
+
+        if(!empty($usuario)){
+            return response()->json([
+                'isValid' => true
+            ]);
+        }
+
+        return response()->json([
+            'isValid' => false
+        ]);
     }
 
     /**
